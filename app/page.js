@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -48,31 +48,31 @@ export default function Home() {
             <p className="mx-auto mt-4 max-w-xl text-lg/8 text-pretty text-gray-600">
               For a wallet holding xAVAX.
             </p>
-            <form onSubmit={handleSubmit} className="mt-14 relative border-2 border-gray-600 py-2">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none stroke-gray-700">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+            <form onSubmit={handleSubmit}>
+              <div className="relative border-2 border-gray-600 py-2 max-w-full mt-14">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none stroke-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  className="focus:outline-none focus:ring-0 block w-full ml-12 text-sm font-medium text-gray-800 placeholder:font-medium border-gray-300 rounded-md"
+                  placeholder="Search for an address..."
+                />
               </div>
-              <input
-                type="text"
-                name="wallet-address"
-                id="wallet-address"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="focus:outline-none focus:ring-0 block w-full ml-12 sm:text-sm font-medium text-gray-800 placeholder:font-medium border-gray-300"
-                placeholder="Search for an address..."
-              />
             </form>
           </div>
         </div>
