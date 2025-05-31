@@ -3,60 +3,67 @@
 import Image from "next/image";
 import { blo } from "blo";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-const stats = [
-  {
-    name: "Realised PnL",
-    value: "$20,000.00",
-  },
-  {
-    name: "Unrealised PnL",
-    value: "$12,000.00",
-  },
-];
-
-const trades = [
-  {
-    trade_type: "Buy",
-    price: "$1.00",
-    amount: "100,000,000",
-    usd_value: "$10,000.00",
-    age: "50 seconds ago",
-  },
-  {
-    trade_type: "Sell",
-    price: "$1.00",
-    amount: "100,000,000",
-    usd_value: "$10,000.00",
-    age: "50 seconds ago",
-  },
-  {
-    trade_type: "Buy",
-    price: "$1.00",
-    amount: "100,000,000",
-    usd_value: "$10,000.00",
-    age: "50 seconds ago",
-  },
-  {
-    trade_type: "Sell",
-    price: "$1.00",
-    amount: "100,000,000",
-    usd_value: "$10,000.00",
-    age: "50 seconds ago",
-  },
-];
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
 export default function AddressClient({ address }) {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState("");
   const [mobileInput, setMobileInput] = useState("");
+  const { address: addressParam } = useParams();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!addressParam) return;
+
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/address/${addressParam}`);
+        const result = await res.json();
+        setData(result);
+      } catch (err) {
+        console.error("Failed to fetch address data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [addressParam]);
 
   const handleSearch = (value) => {
     if (value.trim()) {
       router.push(`/address/${value.trim()}`);
     }
   };
+
+  const format_pnl = (value, colour = false) => {
+    const num = Number(value);
+
+    if (isNaN(num)) {
+      return <span className="text-gray-900">$0.00</span>;
+    }
+
+    const absVal = Math.abs(num);
+    const formatted = absVal.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 4,
+    });
+
+    const sign = num < 0 ? "-" : "";
+    const color =
+      num > 0 ? "text-green-600" : num < 0 ? "text-red-600" : "text-gray-900";
+
+    return (
+      <span className={colour ? "text-gray-900" : color}>
+        {sign}${formatted}
+      </span>
+    );
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (!data) return <p>No data found</p>;
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
@@ -181,26 +188,31 @@ export default function AddressClient({ address }) {
           <dl className="w-full max-w-4xl border-2 border-gray-800 bg-white gap-y-2 px-4 py-4 sm:py-10 sm:px-6 xl:px-8 sm:text-center">
             <dt className="text-sm font-medium text-gray-800">Total PnL</dt>
             <dd className="text-2xl sm:text-6xl font-medium tracking-tight text-gray-900">
-              $32,000.000
+              {format_pnl(data?.pnl?.total_pnl)}
             </dd>
           </dl>
 
           <dl className="w-full max-w-4xl mb-10 border-b-2 border-x-2 border-gray-800 grid grid-cols-1 gap-0.5 bg-gray-800 sm:grid-cols-2">
-            {stats.map((stat) => (
-              <div
-                key={stat.name}
-                className="flex flex-wrap sm:items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:py-10 sm:px-6 xl:px-8"
-              >
-                <div className="flex gap-x-2 items-center">
-                  <dt className="text-sm font-medium text-gray-800">
-                    {stat.name}
-                  </dt>
-                </div>
-                <dd className="w-full text-2xl sm:text-4xl font-medium tracking-tight text-gray-900 text-left">
-                  {stat.value}
-                </dd>
+            <div className="flex flex-wrap sm:items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:py-10 sm:px-6 xl:px-8">
+              <div className="flex gap-x-2 items-center">
+                <dt className="text-sm font-medium text-gray-800">
+                  Realised PnL
+                </dt>
               </div>
-            ))}
+              <dd className="w-full text-2xl sm:text-4xl font-medium tracking-tight text-gray-900 text-left">
+                {format_pnl(data?.pnl?.realised_pnl)}
+              </dd>
+            </div>
+            <div className="flex flex-wrap sm:items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:py-10 sm:px-6 xl:px-8">
+              <div className="flex gap-x-2 items-center">
+                <dt className="text-sm font-medium text-gray-800">
+                  Unrealised PnL
+                </dt>
+              </div>
+              <dd className="w-full text-2xl sm:text-4xl font-medium tracking-tight text-gray-900 text-left">
+                {format_pnl(data?.pnl?.unrealised_pnl)}
+              </dd>
+            </div>
           </dl>
         </div>
 
@@ -235,7 +247,7 @@ export default function AddressClient({ address }) {
                     </th>
                     <th
                       scope="col"
-                      className=" px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                      className="sm:px-3 py-3.5 pr-4 pl-3 text-left text-sm font-semibold text-gray-900 sm:table-cell whitespace-nowrap"
                     >
                       USD Value
                     </th>
@@ -248,35 +260,34 @@ export default function AddressClient({ address }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800 bg-white">
-                  {trades.map((trade, i) => (
+                  {data?.transactions.map((trade, i) => (
                     <tr key={i}>
                       <td className="w-full max-w-0 py-4 pr-3 pl-4 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
                         <div className="flex gap-x-1">
-                          <p>{trade.trade_type}</p>
+                          <p>{trade.trade_type.charAt(0).toUpperCase() + trade.trade_type.slice(1)}</p>
                           <dd className="font-normal md:hidden truncate text-gray-900">
-                            @ {trade.price}
+                            @ {format_pnl(trade.price_in_usd, true)}
                           </dd>
                         </div>
-
                         <dl className="font-normal md:hidden">
                           <dt className="sr-only sm:hidden">Amount</dt>
                           <dd className="mt-1 truncate text-gray-900 md:hidden">
-                            {trade.amount} tokens
+                            {trade.balance} tokens
                           </dd>
                           <dt className="sr-only sm:hidden">Age</dt>
                           <dd className="mt-1 truncate text-gray-900 sm:hidden">
-                            {trade.age}
+                            About {trade.age}
                           </dd>
                         </dl>
                       </td>
                       <td className="hidden px-3 py-4 text-sm font-medium text-gray-900 md:table-cell">
-                        {trade.price}
+                        {format_pnl(trade.price_in_usd, true)}
                       </td>
                       <td className="hidden px-3 py-4 text-sm font-medium text-gray-900 md:table-cell">
-                        {trade.amount}
+                        {trade.balance}
                       </td>
-                      <td className="px-3 py-4 text-sm font-medium text-gray-900">
-                        {trade.usd_value}
+                      <td className="sm:px-3 py-3.5 pr-4 pl-3 text-right sm:text-left text-sm font-medium text-gray-900">
+                      {format_pnl(trade.price_in_usd * trade.balance, true)}
                       </td>
                       <td className="hidden py-4 pr-4 pl-3 sm:text-left text-sm font-medium sm:table-cell">
                         {trade.age}
@@ -291,7 +302,7 @@ export default function AddressClient({ address }) {
       </main>
       <footer className="border-t-2 border-gray-800">
         <p className="p-6 lg:px-8 font-semibold text-center text-sm text-gray-800">
-          &copy; {new Date().getFullYear()} Name. All rights reserved.
+          &copy; {new Date().getFullYear()} Ariessa Norramli. All rights reserved.
         </p>
       </footer>
     </div>

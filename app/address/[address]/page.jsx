@@ -6,7 +6,7 @@ export default function AddressPage({ params }) {
   const address = params.address;
 
   if (!isAddress(address)) {
-    notFound(); // Render 404 page
+    notFound();
   }
 
   return <AddressClient address={address} />;
