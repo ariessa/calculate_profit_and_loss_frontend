@@ -20,7 +20,7 @@ export default function Home() {
       <header className="bg-white border-b-2 border-gray-800">
         <nav
           aria-label="Global"
-          className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+          className="mx-auto flex max-w-7xl items-center justify-between p-6 sm:p-6 sm:gap-y-4 lg:px-8"
         >
           <div className="flex lg:flex-1 gap-x-4 items-center">
             <a href="/" className="-m-1.5 p-1.5">

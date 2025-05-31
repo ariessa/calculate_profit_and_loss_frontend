@@ -109,7 +109,7 @@ export default function AddressClient({ address }) {
                   type="text"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="focus:outline-none focus:ring-0 block w-full px-10 sm:text-sm font-medium text-gray-800 placeholder:font-medium border-gray-300 rounded-md"
+                  className="focus:outline-none focus:ring-0 block w-full pl-10 sm:text-sm font-medium text-gray-800 placeholder:font-medium border-gray-300 rounded-md"
                   placeholder="Search for an address..."
                 />
               </div>
