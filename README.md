@@ -8,6 +8,8 @@ Calculate the profit and loss (PnL) of a wallet address that holds xAVAX tokens.
 
 - [Tech Stack](#tech-stack)
 - [Low Fidelity Wireframes](#low-fidelity-wireframes)
+    - [Home Page](#home-page)
+    - [Address Page](#address-page)
 - [User Interfaces](#user-interfaces)
 - [Installation](#installation)
   - [Prerequisites](#prerequisites)
