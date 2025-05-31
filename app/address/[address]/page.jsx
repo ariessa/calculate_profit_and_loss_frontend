@@ -139,7 +139,7 @@ export default async function AddressPage({ params }) {
       </div>
 
       <main className="flex-1 overflow-auto bg-white">
-        <div className="mx-6 my-8 sm:mx-8 sm:my-18 lg:mx-8 flex gap-x-4 items-center justify-center">
+        <div className="mx-6 my-8 sm:mx-8 sm:my-16 lg:mx-8 flex gap-x-4 items-center justify-center">
           <img
             src={blo(address)}
             alt="Identicon"
@@ -156,7 +156,7 @@ export default async function AddressPage({ params }) {
 
           {/* Full address on medium and larger screens */}
           <h1
-            className="text-lg font-semibold text-gray-700 hidden sm:block"
+            className="text-xl font-semibold text-gray-700 hidden sm:block"
             title={address}
           >
             {address}
