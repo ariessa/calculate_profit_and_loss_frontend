@@ -38,7 +38,7 @@ export default function AddressClient({ address }) {
     }
   };
 
-  const format_pnl = (value, colour = false) => {
+  const format_pnl = (value) => {
     const num = Number(value);
 
     if (isNaN(num)) {
@@ -52,11 +52,9 @@ export default function AddressClient({ address }) {
     });
 
     const sign = num < 0 ? "-" : "";
-    const color =
-      num > 0 ? "text-green-600" : num < 0 ? "text-red-600" : "text-gray-900";
 
     return (
-      <span className={colour ? "text-gray-900" : color}>
+      <span>
         {sign}${formatted}
       </span>
     );
@@ -96,7 +94,7 @@ export default function AddressClient({ address }) {
                 handleSearch(searchInput);
               }}
             >
-              <div className="relative border-2 border-gray-600 p-2 min-w-sm w-full">
+              <div className="relative border-2 border-gray-800 p-2 min-w-sm w-full">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none stroke-gray-700">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +114,7 @@ export default function AddressClient({ address }) {
                   type="text"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="focus:outline-none focus:ring-0 block w-full pl-10 sm:text-sm font-medium text-gray-800 placeholder:font-medium border-gray-300 rounded-md"
+                  className="focus:outline-none focus:ring-0 block w-full pl-10 sm:text-sm font-medium text-gray-900 placeholder:font-medium placeholder:text-gray-700 border-gray-800"
                   placeholder="Search for an address..."
                 />
               </div>
@@ -126,14 +124,14 @@ export default function AddressClient({ address }) {
       </header>
 
       {/* Search bar for mobile (shown only on small screens) */}
-      <div className="block md:hidden px-6 pt-6">
+      <div className="block md:hidden px-6 pt-7">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSearch(searchInput);
           }}
         >
-          <div className="relative border-2 border-gray-600 py-2 max-w-full">
+          <div className="relative border-2 border-gray-800 py-2 max-w-full">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none stroke-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +151,7 @@ export default function AddressClient({ address }) {
               type="text"
               value={mobileInput}
               onChange={(e) => setMobileInput(e.target.value)}
-              className="focus:outline-none focus:ring-0 block w-full ml-12 text-sm font-medium text-gray-800 placeholder:font-medium border-gray-300 rounded-md"
+              className="focus:outline-none focus:ring-0 block w-full ml-12 text-sm font-medium text-gray-900 placeholder:font-medium placeholder:text-gray-700 border-gray-800 rounded-md"
               placeholder="Search for an address..."
             />
           </div>
@@ -170,7 +168,7 @@ export default function AddressClient({ address }) {
 
           {/* Truncated address on small screens */}
           <h1
-            className="text-lg font-semibold text-gray-700 block sm:hidden"
+            className="text-lg font-semibold text-gray-900 block sm:hidden"
             title={address}
           >
             {address.slice(0, 8)}...{address.slice(-8)}
@@ -178,48 +176,52 @@ export default function AddressClient({ address }) {
 
           {/* Full address on medium and larger screens */}
           <h1
-            className="text-xl font-semibold text-gray-700 hidden sm:block"
+            className="text-xl font-semibold text-gray-900 hidden sm:block"
             title={address}
           >
             {address}
           </h1>
         </div>
         <div className="flex flex-col items-center justify-center mx-6 sm:mx-12">
-          <dl className="w-full max-w-4xl border-2 border-gray-800 bg-white gap-y-2 px-4 py-4 sm:py-10 sm:px-6 xl:px-8 sm:text-center">
-            <dt className="text-sm font-medium text-gray-800">Total PnL</dt>
-            <dd className="text-2xl sm:text-6xl font-medium tracking-tight text-gray-900">
-              {format_pnl(data?.pnl?.total_pnl)}
-            </dd>
+          <dl className="w-full max-w-4xl gap-x-4 sm:items-baseline sm:justify-center border-2 border-gray-800 bg-white px-4 py-4 sm:py-10 sm:px-6 xl:px-8 sm:text-center">
+            <div className="flex flex-wrap sm:items-baseline sm:justify-center gap-x-4 gap-y-2 bg-white">
+              <div className="flex items-center">
+                <dt className="text-md font-medium text-gray-800">Total PnL</dt>
+              </div>
+              <dd className="w-full text-2xl sm:text-6xl font-semibold tracking-tight text-gray-900 text-left sm:text-center">
+                {format_pnl(data?.pnl?.total_pnl)}
+              </dd>
+            </div>
           </dl>
 
           <dl className="w-full max-w-4xl mb-10 border-b-2 border-x-2 border-gray-800 grid grid-cols-1 gap-0.5 bg-gray-800 sm:grid-cols-2">
             <div className="flex flex-wrap sm:items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:py-10 sm:px-6 xl:px-8">
-              <div className="flex gap-x-2 items-center">
-                <dt className="text-sm font-medium text-gray-800">
+              <div className="flex items-center">
+                <dt className="text-md font-medium text-gray-800">
                   Realised PnL
                 </dt>
               </div>
-              <dd className="w-full text-2xl sm:text-4xl font-medium tracking-tight text-gray-900 text-left">
+              <dd className="w-full text-2xl sm:text-4xl font-semibold tracking-tight text-gray-900 text-left">
                 {format_pnl(data?.pnl?.realised_pnl)}
               </dd>
             </div>
             <div className="flex flex-wrap sm:items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-4 sm:py-10 sm:px-6 xl:px-8">
-              <div className="flex gap-x-2 items-center">
-                <dt className="text-sm font-medium text-gray-800">
+              <div className="flex items-center">
+                <dt className="text-md font-medium text-gray-800">
                   Unrealised PnL
                 </dt>
               </div>
-              <dd className="w-full text-2xl sm:text-4xl font-medium tracking-tight text-gray-900 text-left">
+              <dd className="w-full text-2xl sm:text-4xl font-semibold tracking-tight text-gray-900 text-left">
                 {format_pnl(data?.pnl?.unrealised_pnl)}
               </dd>
             </div>
           </dl>
         </div>
 
-        <div className="flex flex-col items-center justify-center mx-6 sm:mx-12 mb-4">
-          <dl className="w-full max-w-4xl bg-white gap-y-2 py-4 sm:py-10 xl:px-8 text-gray-800 font-semibold">
+        <div className="flex flex-col items-center justify-center mx-6 sm:mx-12 mb-8 sm:mb-16">
+          <dl className="w-full max-w-4xl bg-white gap-x-4 gap-y-2 text-gray-800 font-semibold">
             <div className="sm:flex sm:items-center">
-              <h1 className="text-base font-semibold text-gray-800">
+              <h1 className="text-base font-semibold text-gray-900">
                 Historical Trades
               </h1>
             </div>
@@ -262,11 +264,14 @@ export default function AddressClient({ address }) {
                 <tbody className="divide-y divide-gray-800 bg-white">
                   {data?.transactions.map((trade, i) => (
                     <tr key={i}>
-                      <td className="w-full max-w-0 py-4 pr-3 pl-4 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
+                      <td className="w-full max-w-4xl py-4 pr-3 pl-4 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
                         <div className="flex gap-x-1">
-                          <p>{trade.trade_type.charAt(0).toUpperCase() + trade.trade_type.slice(1)}</p>
+                          <p>
+                            {trade.trade_type.charAt(0).toUpperCase() +
+                              trade.trade_type.slice(1)}
+                          </p>
                           <dd className="font-normal md:hidden truncate text-gray-900">
-                            @ {format_pnl(trade.price_in_usd, true)}
+                            @ {format_pnl(trade.price_in_usd)}
                           </dd>
                         </div>
                         <dl className="font-normal md:hidden">
@@ -281,13 +286,13 @@ export default function AddressClient({ address }) {
                         </dl>
                       </td>
                       <td className="hidden px-3 py-4 text-sm font-medium text-gray-900 md:table-cell">
-                        {format_pnl(trade.price_in_usd, true)}
+                        {format_pnl(trade.price_in_usd)}
                       </td>
                       <td className="hidden px-3 py-4 text-sm font-medium text-gray-900 md:table-cell">
                         {trade.balance}
                       </td>
                       <td className="sm:px-3 py-3.5 pr-4 pl-3 text-right sm:text-left text-sm font-medium text-gray-900">
-                      {format_pnl(trade.price_in_usd * trade.balance, true)}
+                        {format_pnl(trade.price_in_usd * trade.balance)}
                       </td>
                       <td className="hidden py-4 pr-4 pl-3 sm:text-left text-sm font-medium sm:table-cell">
                         {trade.age}
@@ -302,7 +307,8 @@ export default function AddressClient({ address }) {
       </main>
       <footer className="border-t-2 border-gray-800">
         <p className="p-6 lg:px-8 font-semibold text-center text-sm text-gray-800">
-          &copy; {new Date().getFullYear()} Ariessa Norramli. All rights reserved.
+          &copy; {new Date().getFullYear()} Ariessa Norramli. All rights
+          reserved.
         </p>
       </footer>
     </div>
