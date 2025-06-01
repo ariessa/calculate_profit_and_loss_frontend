@@ -31,13 +31,13 @@ A frontend app that calculates and displays the Profit and Loss (PnL) of a walle
 
 ### Home Page
 
-<img src="wireframes/home_page.png" alt="Home Page Wireframe" width="100%" />
+<img src="wireframes/home_page.png" alt="Home Page Wireframe" />
 
 <br />
 
 ### Address Page
 
-<img src="wireframes/address_page.png" alt="Address Page Wireframe" width="100%" />
+<img src="wireframes/address_page.png" alt="Address Page Wireframe" />
 
 <br />
 
@@ -45,13 +45,13 @@ A frontend app that calculates and displays the Profit and Loss (PnL) of a walle
 
 ### Home Page
 
-<img src="screenshots/home_page.png" alt="Home Page UI" width="100%" />
+<img src="screenshots/home_page.png" alt="Home Page UI" />
 
 <br />
 
 ### Address Page
 
-<img src="screenshots/address_page.png" alt="Address Page UI" width="100%" />
+<img src="screenshots/address_page.png" alt="Address Page UI" />
 
 <br />
 
