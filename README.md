@@ -82,11 +82,15 @@ You will need the following tools installed on your system:
 
 - Install dependencies
 
+  ```bash
+  npm i
+  ```
+
 - Run the development server
 
-```bash
-npm run dev
-```
+  ```bash
+  npm run dev
+  ```
 
 <br />
 
