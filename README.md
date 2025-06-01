@@ -1,6 +1,6 @@
 # Calculate Profit and Loss - Frontend
 
-A frontend app that calculates and displays the Profit and Loss (PnL) of a wallet address holding xAVAX tokens on the Avalanche C-Chain. It queries a backend API to fetch transaction history and PnL breakdown.
+A frontend app that displays the Profit and Loss (PnL) of a wallet address holding xAVAX tokens on the Avalanche C-Chain. It queries a backend API to fetch transaction history and PnL breakdown.
 
 <br />
 
