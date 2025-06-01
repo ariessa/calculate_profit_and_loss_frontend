@@ -57,34 +57,20 @@ A frontend app that calculates and displays the Profit and Loss (PnL) of a walle
 
 ## Installation
 
-> ⚠️ These instructions are tailored for macOS systems with Apple Silicon.
+All installation instructions are geared for macOS Apple Silicon system. Make sure that you have the following versions:
 
-Make sure that you have the following versions:
-
-- **Node.js**: `v24.x`
+- **Node.js**: `v22.x`
 - **npm**: `v11.x` or later
-
-If you’re using `nvm`, you can install and use Node 24 like this:
-
-```bash
-nvm install 24
-nvm use 24
-```
-
-You can verify versions with:
-
-```bash
-node -v
-npm -v
-```
 
 <br />
 
 ### Prerequisites
 
+You will need the following tools installed on your system:
+
 - Git
-- Node.js (v24)
-- npm (v11)
+- Node.js (v22.x)
+- npm (v11.x)
 - nvm (recommended for managing Node versions)
 
 <br />
