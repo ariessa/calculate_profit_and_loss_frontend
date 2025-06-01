@@ -124,7 +124,7 @@ export default function AddressClient({ address }) {
       </header>
 
       {/* Search bar for mobile (shown only on small screens) */}
-      <div className="block md:hidden px-6 pt-7">
+      <div className="block md:hidden pt-7 mt-0 sm:mx-8 sm:mt-2 mx-6 sm:mx-12 lg:mx-8">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -159,7 +159,7 @@ export default function AddressClient({ address }) {
       </div>
 
       <main className="flex-1 overflow-auto bg-white">
-        <div className="mx-6 my-8 sm:mx-8 sm:my-16 lg:mx-8 flex gap-x-4 items-center justify-center">
+        <div className="mx-6 my-8 sm:mx-8 sm:my-8 lg:mx-8 flex gap-x-4 items-center justify-center">
           <img
             src={blo(address)}
             alt="Identicon"
@@ -218,7 +218,7 @@ export default function AddressClient({ address }) {
           </dl>
         </div>
 
-        <div className="flex flex-col items-center justify-center mx-6 sm:mx-12 mb-8 sm:mb-16">
+        <div className="flex flex-col items-center justify-center mx-6 sm:mx-12 mt-4 mb-8 sm:mb-10">
           <dl className="w-full max-w-4xl bg-white gap-x-4 gap-y-2 text-gray-800 font-semibold">
             <div className="sm:flex sm:items-center">
               <h1 className="text-base font-semibold text-gray-900">

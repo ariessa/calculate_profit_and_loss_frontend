@@ -1,6 +1,9 @@
 {
   "name": "calculate_profit_and_loss_frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "A frontend app that calculates and displays the Profit and Loss (PnL) of a wallet address holding xAVAX tokens on the Avalanche C-Chain. It queries a backend API to fetch transaction history and PnL breakdown.",
+  "license": "GPL-3.0",
+  "author": "ariessa",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -21,5 +24,8 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",
     "tailwindcss": "^4.1.7"
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }
