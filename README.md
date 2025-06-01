@@ -11,6 +11,8 @@ A frontend app that calculates and displays the Profit and Loss (PnL) of a walle
     - [Home Page](#home-page)
     - [Address Page](#address-page)
 - [User Interfaces](#user-interfaces)
+    - [Home Page](#home-page-1)
+    - [Address Page](#address-page-1)
 - [Installation](#installation)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
