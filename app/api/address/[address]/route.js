@@ -1,7 +1,5 @@
 export async function GET(request, { params }) {
   const { address } = await params;
-
-  // const api_key = process.env.BACKEND_API_KEY;
   const backend_url = process.env.BACKEND_API_URL;
 
   try {
