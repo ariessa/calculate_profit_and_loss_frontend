@@ -91,25 +91,17 @@ npm -v
 
 ### Setup
 
-1. Clone the repository
+- Clone the repository
 
-  ```bash
-  git clone https://github.com/your-username/your-repo.git
-  cd your-repo
-  ```
+- Create a `.env` file based on `.env.example` file
 
-2. Install dependencies
+- Install dependencies
 
-  ```bash
-  npm install
-  ```
+- Run the development server
 
-3. Run the development server
-
-  ```bash
-  npm run dev
-  ```
-4. Open your browser and navigate to http://localhost:3000
+```bash
+npm run dev
+```
 
 <br />
 
